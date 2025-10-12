@@ -3,9 +3,14 @@
     
 import numpy as np
 
+
 data1 = np.array([2, 5, 7, 5, 5, 4, 5, 5, 6, 6])
 mean1 = np.mean(data1)
 std1 = np.std(data1)
+
+std_manuel = np.sqrt(np.sum((data1 - np.mean(data1)) ** 2) / len(data1))
+print (f'manuel std : {std_manuel}')
+
 print(f'mean : {mean1}, std: {std1}')
 
 data2 = np.array([1, 5, 7, 1, 9, 4, 5, 5, 6, 7])
@@ -18,6 +23,6 @@ mean3 = np.mean(data3)
 std3 = np.std(data3)
 print(f'mean : {mean3}, std: {std3}')
 
-# mean : 5.0, std: 1.2649110640673518
+#mean : 5.0, std: 1.2649110640673518
 #mean : 5.0, std: 2.4083189157584592
 #mean : 5.0, std: 0.0
