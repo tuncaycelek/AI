@@ -10,21 +10,26 @@ std1 = np.std(data1)
 
 std_manuel = np.sqrt(np.sum((data1 - np.mean(data1)) ** 2) / len(data1))
 print (f'manuel std : {std_manuel}')
+#Standart sapmayı manuel hesapladık. std1 ile aynı olmasını bekliyoruz.
 
 print(f'mean : {mean1}, std: {std1}')
+#Standart sapma var, çünkü değerler ortalamadan az uzaklıkta
 
 data2 = np.array([1, 5, 7, 1, 9, 4, 5, 5, 6, 7])
 mean2 = np.mean(data2)
 std2 = np.std(data2)
 print(f'mean : {mean2}, std: {std2}')
+#Standart sapma büyük, çünkü değerler ortalamadan çok uzak
 
 data3 = np.array([5, 5, 5, 5, 5, 5, 5, 5, 5, 5])
 mean3 = np.mean(data3)
 std3 = np.std(data3)
 print(f'mean : {mean3}, std: {std3}')
+#Standart sapma yok, çünkü değerler ortalamaya eşit
 
 #manuel std     : 1.2649110640673518
 #mean : 5.0, std: 1.2649110640673518
 #mean : 5.0, std: 2.4083189157584592
 #mean : 5.0, std: 0.0
+
 
