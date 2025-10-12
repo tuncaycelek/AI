@@ -23,6 +23,7 @@ mean3 = np.mean(data3)
 std3 = np.std(data3)
 print(f'mean : {mean3}, std: {std3}')
 
+#manuel std : 1.2649110640673518
 #mean : 5.0, std: 1.2649110640673518
 #mean : 5.0, std: 2.4083189157584592
 #mean : 5.0, std: 0.0
