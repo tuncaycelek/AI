@@ -22,5 +22,5 @@ print(result)                               # 0.25
 result = uniform.ppf(0.5, A, B - A)
 print(result)                               # 15
 
-x = uniform.rvs(0, 1, 10)       # yukarıdakiyle tamamen aynı biçimde rassal sayı üretir
+x = uniform.rvs(0, 1, 10)       #Düzgün dağılmış rastgele 10 sayı.
 print(x)
