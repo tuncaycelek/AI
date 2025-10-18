@@ -37,3 +37,13 @@ upper_bound = t.ppf(0.975, len(sample) - 1, sample_mean, sampling_mean_std)
 
 print(f'[{lower_bound}, {upper_bound}]')
 
+#----------------------------------------------------------------------------------------------------------------------------
+#   t nesnesinin de ilişkin olduğu sınıfın interval isimli bir metodu bulunmaktadır. Bu metot zaten doğrudan t dağılımını kullanarak 
+#   güven aralıklarını hesaplamaktadır. interval(confidence, df, loc=0, scale=1) confidence parametresi yine "güven düzeyini (confidence level)",
+#   df parametresi serbestlik derecesini, loc ve scale parametreleri de sırasıyla ortalama ve standart sapma değerlerini belirtmektedir
+#   Burada loc parametresine biz örneğimizin ortalamasını, scale parametresine de örneklem dağılımının standart sapmasını girmeliyiz. 
+#   Tabii örneklem dağılımının standart sapması yine örnekten hareketle elde edilecektir. 
+#----------------------------------------------------------------------------------------------------------------------------
+
+lower_bound, upper_bound = t.interval(0.95, len(sample) - 1, sample_mean, sampling_mean_std)
+print(f'[{lower_bound}, {upper_bound}]')
