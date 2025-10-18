@@ -52,7 +52,24 @@ for sample_size in range(30, 105, 5):
 
     print(f'sample size: {sample_size}: [{lower_bound}, {upper_bound}]')     
 
+#----------------------------------------------------------------------------------------------------------------------------
+#    anakütle ortalamaları aslında tek hamlede norm nesnesinin ilişkin olduğu sınıfın interval metoduyla da
+#    elde edilebilmektedir.
+#----------------------------------------------------------------------------------------------------------------------------
 
+sample_size = 60
+population_std = 15
+sample_mean = 109
 
+sampling_mean_std = population_std / np.sqrt(sample_size)
+
+lower_bound = norm.ppf(0.025, sample_mean, sampling_mean_std)
+upper_bound = norm.ppf(0.975,  sample_mean, sampling_mean_std)
+
+print(f'{lower_bound}, {upper_bound}')     
+
+lower_bound, upper_bound = norm.interval(0.95, sample_mean, sampling_mean_std)
+
+print(f'{lower_bound}, {upper_bound}')    
 
 
