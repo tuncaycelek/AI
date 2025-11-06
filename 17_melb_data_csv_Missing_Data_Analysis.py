@@ -1,6 +1,6 @@
 # "Melbourne Housing Snapshot (MHS)"
 # https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot?resource=download
-# https://github.com/tuncaycelek/AI/blob/main/DataSets/diabetes.csv
+# https://github.com/tuncaycelek/AI/blob/main/DataSets/melb_data.csv
 
 
 import pandas as pd
