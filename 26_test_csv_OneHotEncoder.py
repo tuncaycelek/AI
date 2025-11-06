@@ -5,6 +5,12 @@ from sklearn.preprocessing import OneHotEncoder
 
 df = pd.read_csv('DataSets\\test.csv')
 
+    #one-hot-encoding uygulamanın diğer bir yolu Pandas kütüphanesindeki get_dummies fonksiyonunu kullanmaktır
+#print(df)
+#transformed_df = pd.get_dummies(df, dtype='uint8')
+#print(transformed_df)
+
+
 ohe = OneHotEncoder(sparse_output=False, dtype='uint8')
 transformed_data = ohe.fit_transform(df[['RenkTercihi', 'Meslek']])
 df.drop(['RenkTercihi', 'Meslek'], axis=1, inplace=True)
