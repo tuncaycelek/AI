@@ -1,4 +1,4 @@
-
+import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -30,4 +30,6 @@ def fill_gauss(mu = 0, std = 1, fstart= 0, fstop = 0):
     axis.fill_between(x, y)
     plt.show()
 
-fill_gauss(100, 15, 85, 115)
+nd = statistics.NormalDist(100,15)
+result = nd.samples(10)
+print(result)

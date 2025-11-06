@@ -47,3 +47,4 @@ print(f'[{lower_bound}, {upper_bound}]')
 
 lower_bound, upper_bound = t.interval(0.95, len(sample) - 1, sample_mean, sampling_mean_std)
 print(f'[{lower_bound}, {upper_bound}]')
+

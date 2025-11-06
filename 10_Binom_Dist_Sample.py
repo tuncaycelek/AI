@@ -21,5 +21,7 @@ print(f'tura oranı : {hr} , yazı oranı : {tr}')
 
 # 5 kere para atıldığında 3 kere tura gelme olasılığı with binom
 res = binom.pmf(3, 5, 0.5)
-
 print(res)
+
+
+#

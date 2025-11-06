@@ -66,3 +66,5 @@ print(f'Fark: {np.abs(population_mean - samples_means_mean)}')
 
 print(f'Merkezi limit teroreminden elde edilen örnek ortalamalarının standart sapması: {population_std / np.sqrt(50)}')
 print(f'Örnek ortalamalarının standart sapması: {sample_means_std}')
+
+
