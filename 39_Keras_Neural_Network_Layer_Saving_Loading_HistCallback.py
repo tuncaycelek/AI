@@ -16,13 +16,13 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Input, Dense
-from tensorflow.keras.utils import set_random_seed
+import matplotlib.pyplot as plt
 
 TEST_RATIO = 0.2
 # her eğitimde ve test işleminde aynı sonucu elde etmek için random tohum değerini sabitlemeye çalışıyoruz.
 # reproducible
-np.random.seed(1234567)
-set_random_seed(678901)
+#np.random.seed(1234567)
+#set_random_seed(678901)
 df = pd.read_csv('DataSets\\diabetes.csv')
 
 # Eksik veri 
@@ -67,7 +67,7 @@ model.summary()                                                                 
 model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['binary_accuracy']) # eğitim parametreleri
 
 # 5. Model derlenip çeşitli belirlemeler yapıldıktan sonra artık gerçekten eğitim aşamasına geçilir.
-model.fit(training_dataset_x, training_dataset_y, batch_size=32, epochs=100, validation_split=0.2)
+history_callback = model.fit(training_dataset_x, training_dataset_y, batch_size=32, epochs=100, validation_split=0.2)
 
 # 6. fit işleminden sonra artık model eğitilmiştir. Onun test veri kümesiyle test edilmesi gerekir.
 eval_result = model.evaluate(test_dataset_x, test_dataset_y)
@@ -75,36 +75,54 @@ eval_result = model.evaluate(test_dataset_x, test_dataset_y)
 # eğitim tamamlandı. eğitim sonuçlarını yazdırıyorum.
 for i in range(len(eval_result)):
         print(f'{model.metrics_names[i]}: {eval_result[i]}')
-"""
-for name, value in zip(model.metrics_names, eval_result):
-    print(f'{name}: {value}')        
-"""
-
-#model.save_weights('diabetes-weights', save_format='h5')
-#model.load_weights('diabetes-weights.h5')  # Bizim bunu geri yükleyebilmemiz için modeli yeniden 
-                                            # aynı biçimde oluşturmamız ve compile işlemini yapmamız gerekir.
-
-model.save('diabetes.h5', save_format='h5')
-from tensorflow.keras.models import load_model
-model = load_model('diabetes.h5')
 
 
-# 7. Artık model test de edilmiştir. Şimdi sıra "kestirim (prediction)" yapmaya gelmiştir.
-# artık tahminlememizi yapabiliriz : 
-predict_dataset = np.array([[2 ,90, 68, 12, 120, 38.2, 0.503, 28],
-                            [4, 111, 79, 47, 207, 37.1, 1.39, 56],
-                            [3, 190, 65, 25, 130, 34, 0.271, 26],
-                            [8, 176, 90, 34, 300, 50.7, 0.467, 58],
-                            [7, 106, 92, 18, 200, 35, 0.300, 48]])
+hidden1 = model.layers[0]
 
-# 8. Ve son aşama, sonuçların gösterilmesi !
-predict_result = model.predict(predict_dataset)
-print(predict_result)
+weights, bias = hidden1.get_weights()
 
-for result in predict_result[:, 0]:
-    print('Şeker hastası' if result > 0.5 else 'Şeker Hastası Değil')
+print('Weights')
+print(weights)
+
+print('Bias')
+print(bias)
+
+print("5'inci girdi nöronunun ilk saklı katmanın 9'uncu nöronununa bağlantısındaki w değeri")
+w = weights[5, 9]
+print(w)
+
+#weights = weights + 0.1
+#hidden1.set_weights([weights, bias])    # ilk saklı katmandaki "w" değerlerine 0.1 toplanarak değerler 
+                                        # geri yüklenmiştir. (Bu işlemde bir anlam aramayınız).
+ 
+                                        
+#print(type(history_callback))
+# "diabetes" örneği için fit metodunun geri döndürdüğü History callback nesnesi kullanılarak 
+# epoch grafikleri
+plt.figure(figsize=(14, 6))
+plt.title('Epoch - Loss Graph', pad=10, fontsize=14)
+plt.xticks(range(0, 300, 10))
+plt.plot(history_callback.epoch, history_callback.history['loss'])
+plt.plot(history_callback.epoch, history_callback.history['val_loss'])
+plt.legend(['Loss', 'Validation Loss'])
+plt.show()
+
+plt.figure(figsize=(14, 6))
+plt.title('Epoch - Binary Accuracy Graph', pad=10, fontsize=14)
+plt.xticks(range(0, 300, 10))
+plt.plot(history_callback.epoch, history_callback.history['binary_accuracy'])
+plt.plot(history_callback.epoch, history_callback.history['val_binary_accuracy'])
+plt.legend(['Accuracy', 'Validation Accuracy'])
+plt.show()
+
+eval_result = model.evaluate(test_dataset_x, test_dataset_y, batch_size=32)
+
+for i in range(len(eval_result)):
+    print(f'{model.metrics_names[i]}: {eval_result[i]}')
 
 
 
 
-    
+
+
+
